@@ -10,6 +10,7 @@ import it.rdev.blog.api.config.JwtTokenUtil;
 
 @RestController
 public class TestApiController {
+	
 	@Autowired
 	private JwtTokenUtil jwtUtil;
 
@@ -19,14 +20,13 @@ public class TestApiController {
 	}
 	
 	@PostMapping({ "/api/test" })
-	public String post(@RequestHeader(name = "Authorization")String token) {
+	public String post(@RequestHeader(name = "Authorization") String token) {
 		String username = null;
-		
-		if (token != null && token.startsWith("Bearer")) {
-			token = token.replaceAll("Bearer", "");
-			username = token;
+		if(token != null && token.startsWith("Bearer")) {
+			token = token.replaceAll("Bearer ", "");
+			username = jwtUtil.getUsernameFromToken(token);
 		}
-		return "Risorsa Protetta["+ username+"]";
+		return "Risorsa Protetta [" + username + "]";
 	}
 
 }

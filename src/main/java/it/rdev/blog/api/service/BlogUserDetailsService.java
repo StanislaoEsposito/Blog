@@ -38,4 +38,6 @@ public class BlogUserDetailsService implements UserDetailsService {
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 		return userDao.save(newUser);
 	}
+	
+	
 }
