@@ -129,20 +129,14 @@ public class ArticoloController {
 		//Utente che ha effettuato l'accesso
 		if (token != null && token.startsWith("Bearer")) {
 			token = token.replaceAll("Bearer ", "");
-			String username = jwtTokenUtil.getUsernameFromToken(token);
-			ArticoloDTO dto = artService.insertArticolo(titolo, categoria, stato, sottotitolo, testo, autore);
-			//Controllo che l'tente loggato sia l'autore dell'articolo
-			if (dto != null && dto.getAutore().getUsername().equals(username)) {
-				re = new ResponseEntity<ArticoloDTO>(dto, HttpStatus.OK);
-			}else {
-				re = new ResponseEntity<ArticoloDTO>(dto, HttpStatus.NOT_FOUND);
-			}
+			artService.insertArticolo(titolo, categoria, stato, sottotitolo, testo, autore);
+			re = new ResponseEntity<ArticoloDTO>( HttpStatus.OK);
 		}
 		return re;
 		
 	}
 	
-	@RequestMapping(value = "/eliminaArticolo/{id:\\d+}", method = RequestMethod.POST)
+	@RequestMapping(value = "/eliminaArticolo/{id:\\d+}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> eliminaArticolo(@PathVariable final long id, @RequestHeader(name = "Authorization", required = false) String token) {
 		//String titolo, String categoria, String stato, String sottotitolo, String testo, String autore
 		ResponseEntity<ArticoloDTO> re = null;
@@ -150,19 +144,13 @@ public class ArticoloController {
 		//Utente che ha effettuato l'accesso
 		if (token != null && token.startsWith("Bearer")) {
 			token = token.replaceAll("Bearer ", "");
-			String username = jwtTokenUtil.getUsernameFromToken(token);
-			ArticoloDTO dto = artService.deleteArticolo(id);
-			//Controllo che l'tente loggato sia l'autore dell'articolo
-			if (dto != null && dto.getAutore().getUsername().equals(username)) {
-				re = new ResponseEntity<ArticoloDTO>(dto, HttpStatus.OK);
-			}else {
-				re = new ResponseEntity<ArticoloDTO>(dto, HttpStatus.NOT_FOUND);
-			}
+			artService.deleteArticolo(id);
+			re = new ResponseEntity<ArticoloDTO>(HttpStatus.OK);
 		}
 		return re;	
 	}
 	
-	@RequestMapping(value = "/aggiornaArticolo/{titolo}/{categoria}/{stato}/{sottotitolo}/{testo}/{autore}/", method = RequestMethod.POST)
+	@RequestMapping(value = "/aggiornaArticolo/{titolo}/{categoria}/{stato}/{sottotitolo}/{testo}/{autore}/", method = RequestMethod.PUT)
 	public ResponseEntity<?> aggiornaArticolo(@PathVariable final String titolo, final String categoria,final String stato,final String sottotitolo,final String testo,final String autore,@RequestHeader(name = "Authorization", required = false) String token) {
 		//String titolo, String categoria, String stato, String sottotitolo, String testo, String autore
 		ResponseEntity<ArticoloDTO> re = null;
@@ -171,13 +159,8 @@ public class ArticoloController {
 		if (token != null && token.startsWith("Bearer")) {
 			token = token.replaceAll("Bearer ", "");
 			String username = jwtTokenUtil.getUsernameFromToken(token);
-			ArticoloDTO dto = artService.updateArticolo(titolo, categoria, stato, sottotitolo, testo, autore);
-			//Controllo che l'tente loggato sia l'autore dell'articolo
-			if (dto != null && dto.getAutore().getUsername().equals(username)) {
-				re = new ResponseEntity<ArticoloDTO>(dto, HttpStatus.OK);
-			}else {
-				re = new ResponseEntity<ArticoloDTO>(dto, HttpStatus.NOT_FOUND);
-			}
+			artService.updateArticolo(titolo, categoria, stato, sottotitolo, testo, autore);
+			re = new ResponseEntity<ArticoloDTO>(HttpStatus.OK);
 		}
 		return re;
 		
