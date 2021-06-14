@@ -62,9 +62,8 @@ public class ArticoloService {
 	        return dto;
 	}
 		
-		public ArticoloDTO EliminaId(long id) {
-			System.err.println("elimato service");
-	        Articolo a = aDao.DeleteById(id);
+		public ArticoloDTO CercaCategoria(String categoria) {
+	        Articolo a = aDao.findByCategoria(categoria);
 	        ArticoloDTO dto = new ArticoloDTO();
 	        if (a != null) {
 	            	dto.setId(a.getId());
@@ -82,22 +81,104 @@ public class ArticoloService {
 	        return dto;
 		}
 		
-		public ArticoloDTO CercaCategoria(String categoria) {
-			System.err.println("elimato service");
-	        Articolo a = aDao.findByCategoria(categoria);
-	        ArticoloDTO dto = new ArticoloDTO();
+		public ArticoloDTO cercaTag(String tag) {
+			System.err.println("tag service");
+			Articolo a = aDao.findByTag(tag);
+			ArticoloDTO dto = new ArticoloDTO();
 	        if (a != null) {
-	            	dto.setId(a.getId());
-	        		dto.setTag(a.getTags());
-	        		dto.setTitolo(a.getTitolo());
-	        		dto.setCategoria(a.getCategoriaArticolo());
-	        		dto.setStato(a.getStato());
-	        		dto.setSottotitolo(a.getSottotitolo());
-	        		dto.setTesto(a.getTesto());
-	        		dto.setAutore(a.getAutore());
-	        		dto.setDataCreazione(a.getData_creazione());
-	        		dto.setDataPubblicazione(a.getData_pubblicazione());
-	        		dto.setDataModifica(a.getData_modifica());
+            	dto.setId(a.getId());
+        		dto.setTag(a.getTags());
+        		dto.setTitolo(a.getTitolo());
+        		dto.setCategoria(a.getCategoriaArticolo());
+        		dto.setStato(a.getStato());
+        		dto.setSottotitolo(a.getSottotitolo());
+        		dto.setTesto(a.getTesto());
+        		dto.setAutore(a.getAutore());
+        		dto.setDataCreazione(a.getData_creazione());
+        		dto.setDataPubblicazione(a.getData_pubblicazione());
+        		dto.setDataModifica(a.getData_modifica());
+        }
+        return dto;
+			
+		}
+		
+		public ArticoloDTO cercaAutore(String username) {
+			System.err.println("autore service");
+			Articolo a = aDao.findByAutore(username);
+			ArticoloDTO dto = new ArticoloDTO();
+	        if (a != null) {
+            	dto.setId(a.getId());
+        		dto.setTag(a.getTags());
+        		dto.setTitolo(a.getTitolo());
+        		dto.setCategoria(a.getCategoriaArticolo());
+        		dto.setStato(a.getStato());
+        		dto.setSottotitolo(a.getSottotitolo());
+        		dto.setTesto(a.getTesto());
+        		dto.setAutore(a.getAutore());
+        		dto.setDataCreazione(a.getData_creazione());
+        		dto.setDataPubblicazione(a.getData_pubblicazione());
+        		dto.setDataModifica(a.getData_modifica());
+        }
+        return dto;
+			
+		}
+		
+		public ArticoloDTO insertArticolo(String titolo, String categoria, String stato, String sottotitolo, String testo, String autore) {
+			System.err.println("insertArticolo service");
+			Articolo a = aDao.insertArticolo(titolo, categoria, stato, sottotitolo, testo, autore);
+			ArticoloDTO dto = new ArticoloDTO();
+	        if (a != null) {
+            	dto.setId(a.getId());
+        		dto.setTag(a.getTags());
+        		dto.setTitolo(a.getTitolo());
+        		dto.setCategoria(a.getCategoriaArticolo());
+        		dto.setStato(a.getStato());
+        		dto.setSottotitolo(a.getSottotitolo());
+        		dto.setTesto(a.getTesto());
+        		dto.setAutore(a.getAutore());
+        		dto.setDataCreazione(a.getData_creazione());
+        		dto.setDataPubblicazione(a.getData_pubblicazione());
+        		dto.setDataModifica(a.getData_modifica());
+	        }
+	        return dto;
+		}
+		
+		public ArticoloDTO deleteArticolo(long id) {
+			System.err.println("deleteArticolo service");
+			Articolo a = aDao.deleteArticolo(id);
+			ArticoloDTO dto = new ArticoloDTO();
+	        if (a != null) {
+            	dto.setId(a.getId());
+        		dto.setTag(a.getTags());
+        		dto.setTitolo(a.getTitolo());
+        		dto.setCategoria(a.getCategoriaArticolo());
+        		dto.setStato(a.getStato());
+        		dto.setSottotitolo(a.getSottotitolo());
+        		dto.setTesto(a.getTesto());
+        		dto.setAutore(a.getAutore());
+        		dto.setDataCreazione(a.getData_creazione());
+        		dto.setDataPubblicazione(a.getData_pubblicazione());
+        		dto.setDataModifica(a.getData_modifica());
+	        }
+	        return dto;
+		}
+		
+		public ArticoloDTO updateArticolo(String titolo, String categoria, String stato, String sottotitolo, String testo, String autore) {
+			System.err.println("updateArticolo service");
+			Articolo a = aDao.updateArticolo(titolo, categoria, stato, sottotitolo, testo, autore);
+			ArticoloDTO dto = new ArticoloDTO();
+	        if (a != null) {
+            	dto.setId(a.getId());
+        		dto.setTag(a.getTags());
+        		dto.setTitolo(a.getTitolo());
+        		dto.setCategoria(a.getCategoriaArticolo());
+        		dto.setStato(a.getStato());
+        		dto.setSottotitolo(a.getSottotitolo());
+        		dto.setTesto(a.getTesto());
+        		dto.setAutore(a.getAutore());
+        		dto.setDataCreazione(a.getData_creazione());
+        		dto.setDataPubblicazione(a.getData_pubblicazione());
+        		dto.setDataModifica(a.getData_modifica());
 	        }
 	        return dto;
 		}
