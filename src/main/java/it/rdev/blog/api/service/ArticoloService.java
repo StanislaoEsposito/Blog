@@ -5,7 +5,6 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import it.rdev.blog.api.controller.dto.ArticoloDTO;
 import it.rdev.blog.api.dao.ArticoloDao;
@@ -133,7 +132,6 @@ public class ArticoloService {
         return dto;
 		}
 		
-		//Con questo metodo converto un articolo dal tipo Articolo al tipo ArticoloDTO e lo ritorno
 		public void insertArticolo(String titolo, String categoria, String stato, String sottotitolo, String testo, String autore) {
 			aDao.insertArticolo(titolo, categoria, stato, sottotitolo, testo, autore);
 		}
